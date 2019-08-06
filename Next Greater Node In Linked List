@@ -1,0 +1,18 @@
+class Solution {
+public:
+        vector<int> nextLargerNodes(ListNode* head) {
+        vector<int> res, stack;
+        while (head!=NULL) {
+            while (stack.size() && res[stack.back()] < head->val) {
+                res[stack.back()] = head->val;
+                stack.pop_back();
+            }
+            stack.push_back(res.size());
+            res.push_back(head->val);
+            head = head->next;
+        }
+        for (int i: stack) res[i] = 0;
+        return res;
+    
+    }
+};
